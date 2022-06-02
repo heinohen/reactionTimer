@@ -17,15 +17,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class driverScreen extends JFrame implements ActionListener{
+public class DriverScreen extends JFrame implements ActionListener{
 	
 	JButton btnStart;
 	JButton btnStop;
+	JButton submit;
 	JLabel lblTop;
 	JLabel lblBottom;
-	JLabel lblInside;
+	JLabel lblInside;	
+	JTextField textField;
 	String pelaaja;
 	String reactionTime;
 	
@@ -33,8 +36,8 @@ public class driverScreen extends JFrame implements ActionListener{
 	 * Constructor for the window with buttons
 	 */
 	
-	driverScreen(String pelaaja) {
-		this.pelaaja = pelaaja;
+	DriverScreen() {
+		this.pelaaja = "moi";
 		this.reactionTime = "12:34:56";
 		
 		/*
@@ -45,7 +48,7 @@ public class driverScreen extends JFrame implements ActionListener{
 		
 		btnStart = new JButton();
 		ImageIcon raja = new ImageIcon("raja.png");
-		btnStart.setBounds(100, 100, 400, 200);
+		btnStart.setBounds(500, 300, 350, 180);
 		/*
 		btn.addActionListener(e -> System.out.println("moop")); // prints when pressed ( short hand for implementing actionlistener! )
 		btn.addActionListener(e -> btn.setEnabled(false)); // can only press once and the disabled
@@ -64,12 +67,22 @@ public class driverScreen extends JFrame implements ActionListener{
 		 */
 		
 		btnStop = new JButton();
-		btnStop.setBounds(200,350, 100, 50);
+		btnStop.setBounds(200,450, 100, 50);
 		btnStop.addActionListener(this);
 		btnStop.setText("CLICK!");
 		
+		/*
+		 * 
+		 * BUTTON SUBMIT
+		 * 
+		 */
 		
-		/**
+		submit = new JButton("Submit");
+		submit.setBounds(0, 170, 60, 20);
+		submit.addActionListener(this);
+		
+		
+		/*
 		 * 
 		 * LABEL TOP
 		 * 
@@ -86,21 +99,21 @@ public class driverScreen extends JFrame implements ActionListener{
 		lblTop.setBorder(brdTop);
 		
 		
-		/**
+		/*
 		 * 
 		 * LABEL BOTTOM
 		 * 
 		 */
 		
-		lblBottom = new JLabel(pelaaja);
+		lblBottom = new JLabel();
 		lblBottom.setFont(new Font("Verdana", Font.BOLD, 15));
 		lblBottom.setForeground(Color.red);
-		lblBottom.setBounds(0, 400, 100, 70);
+		lblBottom.setBounds(0, 600, 100, 70);
 		lblBottom.setVisible(false);
 		Border brdBottom = BorderFactory.createLineBorder(Color.red,3);
 		lblBottom.setBorder(brdBottom);
 		
-		/**
+		/*
 		 * 
 		 * LABEL INSIDE (FOR TIME)
 		 * 
@@ -112,8 +125,18 @@ public class driverScreen extends JFrame implements ActionListener{
 		Border brdInside = BorderFactory.createLineBorder(Color.blue, 3);
 		lblInside.setBorder(brdInside);
 		
-		/**
+		
+		/*
 		 * 
+		 * TEXTBOX
+		 * 
+		 */
+		
+		textField = new JTextField("Enter your name here");
+		textField.setBounds(0, 120, 200, 50);
+		textField.setVisible(true);
+		
+		/*
 		 * 
 		 * ACTUAL FRAME
 		 * 
@@ -123,10 +146,12 @@ public class driverScreen extends JFrame implements ActionListener{
 		this.setLayout(null);
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
-		this.setSize(500,500);
+		this.setSize(1000,1000);
 		this.setVisible(true);
 		this.add(btnStart);
 		this.add(btnStop);
+		this.add(submit);
+		this.add(textField);
 		this.add(lblTop);
 		this.add(lblBottom);
 		this.add(lblInside);
@@ -152,6 +177,11 @@ public class driverScreen extends JFrame implements ActionListener{
 			System.out.println("Stop");
 			reactionTest();
 			lblInside.setVisible(true);
+		}
+		
+		if (e.getSource() == submit) {
+			lblBottom.setText(textField.getText());
+			submit.setEnabled(false);
 		}
 	}
 

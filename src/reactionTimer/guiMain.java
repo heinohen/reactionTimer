@@ -8,10 +8,8 @@ package reactionTimer;
 public class guiMain {
 
 	public static void main(String[] args) {
-		
-		String name = "Pelaaja";
-		driverScreen driver = new driverScreen(name);
 
+		DriverScreen driver = new DriverScreen();
 
 		/*
 		 * 
